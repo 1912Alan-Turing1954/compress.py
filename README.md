@@ -1,0 +1,2 @@
+# compress.py
+Compression CLI.

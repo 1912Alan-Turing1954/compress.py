@@ -4,4 +4,4 @@
 
 ### To use simply Download the compress.exe file and place it in your C:\Windows\System32
 
-## Downlaod >> [compress.exe](file:///C:/Users/Alan%20M.%20Turing/compress.exe)
+## Downlaod >> [compress.exe]('file:///C:/Users/Alan%20M.%20Turing/compress.exe')

@@ -2,7 +2,7 @@
 
 ## This is a compression command, that can iterate through your entire Drive and find a file of your choice and compress it down 50% - 90%.
 
-### To use simply Download the project.zip file, extract and place the compress.exe in this directory 'C:\Windows\System32'
+### To use simply Download the project.zip file, extract and place the compress.exe in this directory 'C:\Windows\System32' and you will be able to use the command globally in any directory or shell. the command = "compress" simple.
 
 ```Python
 def compress():

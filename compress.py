@@ -20,22 +20,32 @@ def main_program():
         start_time = perf_counter()
 
         amount_of_files = []
-        
+        before = 0
+        after = 0
+                
         for relPath, dirs, files in os.walk(root):
             if name in dirs:
                 folderPath = os.path.join(root, relPath, name)
                 print(folderPath)
                 for relPath, dirs, files in os.walk(folderPath):
+                    if os.listdir(folderPath) == []:
+                        print('---------------')
+                        print('Error: Folder is empty')
+                        main_program()
                     for file in files:
                         fold = os.path.join(folderPath, relPath, file)
                         text = open(fold, 'rb').read()
-                        compressed = base64.b64encode(zlib.compress(text, 9))                        
+                        before += sys.getsizeof(text)
+                        compressed = base64.b64encode(zlib.compress(text, 9))
+                        after += sys.getsizeof(compressed)                                   
                         end_time = perf_counter()
                         savecomp = open(fold, 'wb').write(compressed)
                         amount_of_files.append(1)
                         
                 print('---------------')
                 print(f'Amount of files compressed: {len(amount_of_files)}')
+                print(f'folder size before compression: {before}')
+                print(f'folder size after compression: {after}')
                 print('---------------')
                 print(f'Fullpath to compressed folder: {folderPath}')
                 print(f'(Time to execute and compress: {round(end_time - start_time, 2)}s)')
@@ -62,21 +72,31 @@ def main_program():
         start_time = perf_counter()
         
         amount_of_files = []
-        
+        before = 0
+        after = 0
+                
         for relPath, dirs, files in os.walk(root):
             if name in dirs:
                 folderPath = os.path.join(root, relPath, name)
                 print(folderPath)
                 for relPath, dirs, files in os.walk(folderPath):
+                    if os.listdir(folderPath) == []:
+                        print('---------------')
+                        print('Error: Folder is empty')
+                        main_program()
                     for file in files:
                         fold = os.path.join(folderPath, relPath, file)
                         text = open(fold, 'rb').read()
-                        decompressed = zlib.decompress(base64.b64decode(text))                        
+                        before += sys.getsizeof(text)
+                        decompressed = zlib.decompress(base64.b64decode(text))   
+                        after += sys.getsizeof(decompressed)                     
                         end_time = perf_counter()
                         savecomp = open(fold, 'wb').write(decompressed)
                         amount_of_files.append(1)
                 print('---------------')
-                print(f'Amount of files compressed: {len(amount_of_files)}')
+                print(f'Amount of files decompressed: {len(amount_of_files)}')
+                print(f'folder size before decompression: {before}')
+                print(f'folder size after decompression: {after}')
                 print('---------------')
                 print(f'Fullpath to decompressed folder: {folderPath}')
                 print(f'(Time to execute and decompress: {round(end_time - start_time, 2)}s)')

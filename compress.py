@@ -1,5 +1,7 @@
-import zlib, sys, base64, os 
+import zlib, sys, base64, os
 from time import perf_counter
+
+root = 'C:\\'
 
 def main_program():
     root = ''
@@ -14,12 +16,32 @@ def main_program():
         root = f'{drive[0].upper()}:\\'
 
     def compress():
-        filename = str(input('Enter filename that you wish to compress: '))
+        name = str(input('Enter filename or foldername that you wish to compress: '))
         start_time = perf_counter()
 
+        amount_of_files = []
+        
         for relPath, dirs, files in os.walk(root):
-            if filename in files:
-                fullPath = os.path.join(root, relPath, filename)
+            if name in dirs:
+                folderPath = os.path.join(root, relPath, name)
+                print(folderPath)
+                for relPath, dirs, files in os.walk(folderPath):
+                    for file in files:
+                        fold = os.path.join(folderPath, relPath, file)
+                        text = open(fold, 'rb').read()
+                        compressed = base64.b64encode(zlib.compress(text, 9))                        
+                        end_time = perf_counter()
+                        savecomp = open(fold, 'wb').write(compressed)
+                        amount_of_files.append(1)
+                        
+                print('---------------')
+                print(f'Amount of files compressed: {len(amount_of_files)}')
+                print('---------------')
+                print(f'Fullpath to compressed folder: {folderPath}')
+                print(f'(Time to execute and compress: {round(end_time - start_time, 2)}s)')
+                        
+            if name in files:
+                fullPath = os.path.join(root, relPath, name)
                 text = open(fullPath, 'rb').read()
                 print('---------------')
                 print(f'Raw file size: {sys.getsizeof(text)}')
@@ -36,12 +58,31 @@ def main_program():
                 return savecomp
 
     def decompress():
-        filename = str(input('Enter filename that you wish to decompress: '))
+        name = str(input('Enter filename or foldername that you wish to decompress: '))
         start_time = perf_counter()
         
+        amount_of_files = []
+        
         for relPath, dirs, files in os.walk(root):
-            if filename in files:
-                fullPath = os.path.join(root, relPath, filename)
+            if name in dirs:
+                folderPath = os.path.join(root, relPath, name)
+                print(folderPath)
+                for relPath, dirs, files in os.walk(folderPath):
+                    for file in files:
+                        fold = os.path.join(folderPath, relPath, file)
+                        text = open(fold, 'rb').read()
+                        decompressed = zlib.decompress(base64.b64decode(text))                        
+                        end_time = perf_counter()
+                        savecomp = open(fold, 'wb').write(decompressed)
+                        amount_of_files.append(1)
+                print('---------------')
+                print(f'Amount of files compressed: {len(amount_of_files)}')
+                print('---------------')
+                print(f'Fullpath to decompressed folder: {folderPath}')
+                print(f'(Time to execute and decompress: {round(end_time - start_time, 2)}s)')
+            
+            if name in files:
+                fullPath = os.path.join(root, relPath, name)
                 text = open(fullPath, 'rb').read()
                 print('---------------')
                 print(f'Compressed file size: {sys.getsizeof(text)}')

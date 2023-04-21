@@ -1,4 +1,5 @@
-import zlib, sys, base64, os
+import zlib, sys, base64, os 
+from datetime import datetime
 from time import perf_counter
 
 root = 'C:\\'
@@ -49,6 +50,11 @@ def main_program():
                 print('---------------')
                 print(f'Fullpath to compressed folder: {folderPath}')
                 print(f'(Time to execute and compress: {round(end_time - start_time, 2)}s)')
+                today = datetime.now().date()
+                print(f"Current date: {today}")
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print(f'Current Time: {current_time}')
                 print('---------------')
                         
             if name in files:
@@ -65,6 +71,11 @@ def main_program():
                 print(f'Fullpath to compressed file: {fullPath}')
                 end_time = perf_counter()
                 print(f'(Time to execute and compress: {round(end_time - start_time, 2)}s)')
+                today = datetime.now().date()
+                print(f"Current date: {today}")
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print(f'Current Time: {current_time}')
                 print('---------------')
                 savecomp = open(fullPath, 'wb').write(compressed)
                 return savecomp
@@ -102,6 +113,11 @@ def main_program():
                 print('---------------')
                 print(f'Fullpath to decompressed folder: {folderPath}')
                 print(f'(Time to execute and decompress: {round(end_time - start_time, 2)}s)')
+                today = datetime.now().date()
+                print(f"Current date: {today}")
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print(f'Current Time: {current_time}')
                 print('---------------')
             
             if name in files:
@@ -118,6 +134,11 @@ def main_program():
                 print(f'Fullpath to compressed file: {fullPath}')
                 end_time = perf_counter()
                 print(f'(Time to execute and decompress: {round(end_time - start_time, 2)}s)')
+                today = datetime.now().date()
+                print(f"Current date: {today}")
+                now = datetime.now()
+                current_time = now.strftime("%H:%M:%S")
+                print(f'Current Time: {current_time}')
                 print('---------------')
                 savecomp = open(fullPath, 'wb').write(decompressed)
                 return savecomp

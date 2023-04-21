@@ -6,7 +6,7 @@ root = 'C:\\'
 def main_program():
     root = ''
 
-    option = str(input('Enter if you would to compress dcompress a file or folder, (Compress/Decompress): '))
+    option = str(input('Enter if you would to compress or dcompress a file/folder, (Compress/Decompress): '))
         
     drive = str(input('Enter the drive the file is located in (C/E/D), (Optional): '))
 

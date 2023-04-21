@@ -32,6 +32,7 @@ def main_program():
                     if os.listdir(folderPath) == []:
                         print('---------------')
                         print('Error: Folder is empty')
+                        print('---------------')
                         main_program()
                     for file in files:
                         fold = os.path.join(folderPath, relPath, file)
@@ -59,6 +60,11 @@ def main_program():
                         
             if name in files:
                 fullPath = os.path.join(root, relPath, name)
+                if os.path.getsize(fullPath) == 0:
+                    print('---------------')
+                    print("Error: File is empty")
+                    print('---------------')
+                    main_program() 
                 text = open(fullPath, 'rb').read()
                 print('---------------')
                 print(f'Raw file size: {sys.getsizeof(text)}')
@@ -96,6 +102,7 @@ def main_program():
                     if os.listdir(folderPath) == []:
                         print('---------------')
                         print('Error: Folder is empty')
+                        print('---------------')
                         main_program()
                     for file in files:
                         fold = os.path.join(folderPath, relPath, file)
@@ -122,6 +129,11 @@ def main_program():
             
             if name in files:
                 fullPath = os.path.join(root, relPath, name)
+                if os.path.getsize(fullPath) == 0:
+                    print('---------------')
+                    print("Error: File is empty")
+                    print('---------------')
+                    main_program() 
                 text = open(fullPath, 'rb').read()
                 print('---------------')
                 print(f'Compressed file size: {sys.getsizeof(text)}')

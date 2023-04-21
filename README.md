@@ -28,3 +28,5 @@ def compress():
                 return savecomp
 
 ```
+
+##  Capable of compressing/decompressing a folder and files in said folder, also if you would like a single file of choice to compress/decompress.
